@@ -15,7 +15,7 @@ public class BlogEntryRepository {
   private JdbcTemplate jdbc;
 
   public List<BlogEntry> getAllBlogEntries() {
-    SqlRowSet rowSet = jdbc.queryForRowSet("SELECT BlogEntry.id, Users.username, " +
+    SqlRowSet rowSet = jdbc.queryForRowSet("SELECT BlogEntry.id, Users.displayName, " +
         "BlogEntry.created, BlogEntry.modified, BlogEntry.title, BlogEntryContent.content FROM BlogEntry " +
         "INNER JOIN BlogEntryContent ON BlogEntry.contentId = BlogEntryContent.id " +
         "INNER JOIN Users ON BlogEntry.authorId = Users.id");
@@ -24,7 +24,7 @@ public class BlogEntryRepository {
     while(rowSet.next()) {
       BlogEntry blogEntry = new BlogEntry();
       blogEntry.setId(rowSet.getInt("id"));
-      blogEntry.setAuthor(rowSet.getString("username"));
+      blogEntry.setAuthor(rowSet.getString("displayName"));
       blogEntry.setCreated(rowSet.getTimestamp("created").toLocalDateTime());
       Timestamp modified = rowSet.getTimestamp("modified");
       blogEntry.setModified(modified == null ? null : modified.toLocalDateTime());
@@ -35,5 +35,25 @@ public class BlogEntryRepository {
 
     return result;
   }
+  
+  public BlogEntry getBlogEntry(int id) {
+    SqlRowSet rowSet = jdbc.queryForRowSet("SELECT BlogEntry.id, Users.displayName, " +
+        "BlogEntry.created, BlogEntry.modified, BlogEntry.title, BlogEntryContent.content FROM BlogEntry " +
+        "INNER JOIN BlogEntryContent ON BlogEntry.contentId = BlogEntryContent.id " +
+        "INNER JOIN Users ON BlogEntry.authorId = Users.id WHERE BlogEntry.id = " + id);
+    BlogEntry result = null;
+    
+    if (rowSet.first()) {
+      result = new BlogEntry();
+      result.setId(rowSet.getInt("id"));
+      result.setAuthor(rowSet.getString("displayName"));
+      result.setCreated(rowSet.getTimestamp("created").toLocalDateTime());
+      Timestamp modified = rowSet.getTimestamp("modified");
+      result.setModified(modified == null ? null : modified.toLocalDateTime());
+      result.setTitle(rowSet.getString("title"));
+      result.setContent(rowSet.getString("content"));
+    }
 
+    return result;
+  }
 }

@@ -1,7 +1,7 @@
 package com.krisztianszabo.blog;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 public class BlogEntry {
   private int id;
@@ -10,6 +10,7 @@ public class BlogEntry {
   private LocalDateTime modified;
   private String title;
   private String content;
+  private final DateTimeFormatter DT_FORMAT = DateTimeFormatter.ofPattern("dd MMMM yyyy', at 'kk:mm");
 
   public int getId() {
     return id;
@@ -51,15 +52,35 @@ public class BlogEntry {
     this.title = title;
   }
 
+  public String getContent(int charLimit) {
+    if (charLimit < this.content.length()) {
+      return this.content.substring(0, charLimit).concat("...");
+    } else {
+      return getContent();
+    }
+  }
+
+  public String[] getContentAsArray(int charLimit) {
+    return getContent(charLimit).split("\n");
+  }
+
   public String getContent() {
-    return content;
+    return this.content;
   }
 
   public String[] getContentAsArray() {
-    return this.content.split("\n");
+    return getContent().split("\n");
   }
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+  public String getFormattedCreated() {
+    return this.created.format(DT_FORMAT);
+  }
+
+  public String getFormattedModified() {
+    return this.modified.format(DT_FORMAT);
   }
 }
