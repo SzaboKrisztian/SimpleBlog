@@ -14,12 +14,12 @@ public class BlogController {
   @GetMapping("/blog")
   public String blog(Model model) {
     model.addAttribute("entries", blogEntryRepo.getAllBlogEntries());
-    return "blog-view";
+    return "blog/blog-list-view";
   }
 
   @GetMapping("/blog/entry/{id}")
   public String detailView(@PathVariable("id")int id, Model model) {
     model.addAttribute("entry", blogEntryRepo.getBlogEntry(id));
-    return "blog-detail-view";
+    return "blog/blog-entry-view";
   }
 }

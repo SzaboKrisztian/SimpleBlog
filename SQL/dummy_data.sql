@@ -10,3 +10,8 @@ Nam sit amet arcu ipsum. Pellentesque interdum laoreet urna, eu elementum lacus 
 
 INSERT INTO blogentry(authorId, title, contentId) VALUES ((SELECT id FROM users WHERE username = 'Chris'),
                               'And now, something completely different!', 3);
+
+INSERT INTO blogentrycontent VALUE (NULL, 'This is a rather short blog post. What a waste of screen real estate, innit?');
+
+INSERT INTO blogentry(authorId, title, contentId) VALUES ((SELECT id FROM users WHERE username = 'Chris'),
+                              'A short one', (SELECT id FROM blogentrycontent WHERE content LIKE 'This%'));
