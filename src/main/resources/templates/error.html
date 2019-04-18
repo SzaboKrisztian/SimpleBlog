@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Index</title>
+
+    <div th:replace="includes :: bootstrap_head"></div>
+</head>
+<body>
+    <div th:replace="includes :: navbar"></div>
+
+    <div class="container">
+        <div class="jumbotron text-white rounded bg-dark">
+            <h1 class="display-4 p-4">Whoops, something went wrong!</h1>
+            <h5 class="p-4">Use the navigation menu to find your way again</h5>
+        </div>
+    </div>
+
+    <div th:replace="includes :: bootstrap_body"></div>
+</body>
+</html>

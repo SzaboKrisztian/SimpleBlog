@@ -9,5 +9,4 @@ Aenean id facilisis est. Cras quis ipsum varius, mollis tellus at, volutpat quam
 Nam sit amet arcu ipsum. Pellentesque interdum laoreet urna, eu elementum lacus dignissim vel. Donec sapien nisi, ultrices accumsan turpis ac, tristique iaculis arcu. Praesent ut lectus in odio luctus fringilla sit amet at sem. Pellentesque faucibus vulputate interdum. Mauris efficitur nibh quis sapien faucibus auctor. Donec lobortis, lectus ut vestibulum lobortis, mi dolor laoreet nibh, vitae eleifend justo justo in arcu. Quisque nec ante tincidunt ipsum pulvinar cursus sit amet sit amet nulla. Aenean vestibulum eros in arcu egestas finibus. Phasellus quis metus quis turpis euismod rutrum at ac magna. Phasellus commodo tincidunt ligula, non ornare ex tempor tincidunt. ');
 
 INSERT INTO blogentry(authorId, title, contentId) VALUES ((SELECT id FROM users WHERE username = 'Chris'),
-                              'Lorem ipsum ftw!',
-                              (SELECT id FROM blogentrycontent WHERE content LIKE 'Lorem ipsum%'));
+                              'And now, something completely different!', 3);
