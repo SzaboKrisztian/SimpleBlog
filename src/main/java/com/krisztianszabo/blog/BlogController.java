@@ -31,7 +31,7 @@ public class BlogController {
     return "blog/blog-entry-edit";
   }
 
-  @PostMapping("/blog/save")
+  @PostMapping("/blog/update")
   public String saveEntry(@ModelAttribute BlogEntry entry) {
     blogEntryRepo.editBlogEntry(entry);
     return "redirect:/blog/entry/" + entry.getId();
@@ -48,5 +48,17 @@ public class BlogController {
   public String deleteConfirmed(@ModelAttribute BlogEntry entry) {
     blogEntryRepo.deleteBlogEntry(entry.getId());
     return "redirect:/blog";
+  }
+
+  @GetMapping("/blog/add")
+  public String addEntry(Model model) {
+    model.addAttribute("entry", new BlogEntry());
+    return "blog/blog-entry-add";
+  }
+
+  @PostMapping("/blog/add")
+  public String saveNewEntry(@ModelAttribute BlogEntry entry) {
+    BlogEntry newBlogEntry = blogEntryRepo.createBlogEntry(entry);
+    return "redirect:/blog/entry/" + newBlogEntry.getId();
   }
 }

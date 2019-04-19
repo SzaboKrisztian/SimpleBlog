@@ -2,9 +2,15 @@ package com.krisztianszabo.blog;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,5 +72,36 @@ public class BlogEntryRepository {
 
   public void deleteBlogEntry(int id) {
     jdbc.update("DELETE FROM BlogEntry WHERE BlogEntry.id=" + id);
+  }
+
+  public BlogEntry createBlogEntry(BlogEntry data) {
+    PreparedStatementCreator psc = new PreparedStatementCreator() {
+      @Override
+      public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO BlogEntryContent(content) VALUES (?)", new String[]{"id"});
+        ps.setString(1, data.getContent());
+        return ps;
+      }
+    };
+    KeyHolder id = new GeneratedKeyHolder();
+    jdbc.update(psc, id);
+    int contentId = id.getKey().intValue();
+
+    psc = new PreparedStatementCreator() {
+      @Override
+      public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+        PreparedStatement ps = connection.prepareStatement("INSERT INTO BlogEntry(authorId, " +
+            "title, contentId) VALUES((SELECT Users.id FROM Users WHERE Users.username='Chris'), " +
+            "?, ?);", new String[]{"id"});
+        ps.setString(1, data.getTitle());
+        ps.setInt(2, contentId);
+        return ps;
+      }
+    };
+    id = new GeneratedKeyHolder();
+    jdbc.update(psc, id);
+    int entryId = id.getKey().intValue();
+
+    return getBlogEntry(entryId);
   }
 }

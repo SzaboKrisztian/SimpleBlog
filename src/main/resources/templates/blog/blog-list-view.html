@@ -11,7 +11,9 @@
     <div class="d-flex flex-column sticky-footer-wrapper">
         <div th:replace="includes :: navbar"></div>
 
+        <!-- TODO Pagination? -->
         <main class="flex-fill">
+            <a href="/blog/add" class="btn btn-primary float-right mx-3">Write new entry</a>
             <div class="container" th:each="entry:${entries}">
                 <div class="jumbotron jumbotron-fluid rounded-lg text-dark bg-light mb-3 p-4 border border-dark">
                     <a class="text-dark" th:href="'/blog/entry/' + ${entry.getId()}">
