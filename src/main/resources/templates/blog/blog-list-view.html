@@ -21,7 +21,7 @@
                     <div th:each="paragraph:${entry.getContentAsArray(500)}">
                         <p class="card-text text-justify" th:text="${paragraph}" style="margin-top: .5rem; margin-bottom: .5rem;"></p>
                     </div>
-                    <a class="text-dark h6 font-weight-bold" th:href="'/blog/entry/' + ${entry.getId()}">Continue reading</a>
+                    <a class="text-dark h6 font-weight-bold" th:if="${entry.getContent().length()} &gt; 500" th:href="'/blog/entry/' + ${entry.getId()}">Continue reading</a>
                 </div>
             </div>
         </main>

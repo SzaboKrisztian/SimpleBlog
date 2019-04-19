@@ -30,4 +30,10 @@ public class BlogController {
     model.addAttribute("entry", blogEntryRepo.getBlogEntry(entryId));
     return "blog/blog-entry-edit";
   }
+
+  @PostMapping("/blog/save")
+  public String saveEntry(@ModelAttribute BlogEntry entry) {
+    blogEntryRepo.editBlogEntry(entry);
+    return "redirect:/blog/entry/" + entry.getId();
+  }
 }

@@ -83,4 +83,16 @@ public class BlogEntry {
   public String getFormattedModified() {
     return this.modified.format(DT_FORMAT);
   }
+
+  @Override
+  public String toString() {
+    return "BlogEntry{" +
+        "id=" + id +
+        ", author='" + author + '\'' +
+        ", created=" + created +
+        ", modified=" + modified +
+        ", title='" + title + '\'' +
+        ", content='" + content + '\'' +
+        '}';
+  }
 }

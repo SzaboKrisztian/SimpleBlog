@@ -18,7 +18,7 @@ public class BlogEntryRepository {
     SqlRowSet rowSet = jdbc.queryForRowSet("SELECT BlogEntry.id, Users.displayName, " +
         "BlogEntry.created, BlogEntry.modified, BlogEntry.title, BlogEntryContent.content FROM BlogEntry " +
         "INNER JOIN BlogEntryContent ON BlogEntry.contentId = BlogEntryContent.id " +
-        "INNER JOIN Users ON BlogEntry.authorId = Users.id");
+        "INNER JOIN Users ON BlogEntry.authorId = Users.id ORDER BY BlogEntry.created DESC");
     List<BlogEntry> result = new ArrayList<>();
 
     while(rowSet.next()) {
@@ -55,5 +55,12 @@ public class BlogEntryRepository {
     }
 
     return result;
+  }
+
+  public void editBlogEntry(BlogEntry data) {
+    jdbc.update("UPDATE BlogEntry INNER JOIN BlogEntryContent ON BlogEntry.contentId =" +
+        " BlogEntryContent.id SET BlogEntry.title='" + data.getTitle() +
+        "', BlogEntry.modified = CURRENT_TIMESTAMP, BlogEntryContent.content='" + data.getContent() +
+        "' WHERE BlogEntry.id=" + data.getId());
   }
 }
