@@ -14,19 +14,13 @@
         <main class="flex-fill">
             <div class="container">
                 <div class="jumbotron jumbotron-fluid rounded-lg text-dark bg-light mb-3 p-4 border border-dark clearfix">
-                    <form action="/blog/save" th:object="${entry}" method="post">
+                    <form action="/blog/delete/confirm" th:object="${entry}" method="post">
                         <input type="hidden" id="id" name="id" th:value="${entry.getId()}" required>
-                        <div class="form-group">
-                            <label for="title">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" th:value="${entry.getTitle()}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="content">Content</label>
-                            <textarea class="form-control" id="content" name="content" rows="10" th:text="${entry.getContent()}" required></textarea>
-                        </div>
+                        <h2 class="display-3 font-weight-bold">WARNING!</h2>
+                        <h2 class="display-4">Action cannot be undone.</h2>
                         <div class="form-group float-right">
                             <a th:href="'/blog/entry/' + ${entry.id}" class="btn btn-primary">Cancel</a>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-danger">Confirm</button>
                         </div>
                     </form>
                 </div>

@@ -36,4 +36,17 @@ public class BlogController {
     blogEntryRepo.editBlogEntry(entry);
     return "redirect:/blog/entry/" + entry.getId();
   }
+
+  @PostMapping("/blog/delete")
+  public String deleteEntry(HttpServletRequest request, Model model) {
+    int entryId = Integer.parseInt(request.getParameter("entryId"));
+    model.addAttribute("entry", blogEntryRepo.getBlogEntry(entryId));
+    return "blog/blog-entry-delete";
+  }
+
+  @PostMapping("/blog/delete/confirm")
+  public String deleteConfirmed(@ModelAttribute BlogEntry entry) {
+    blogEntryRepo.deleteBlogEntry(entry.getId());
+    return "redirect:/blog";
+  }
 }

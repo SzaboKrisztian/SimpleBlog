@@ -63,4 +63,8 @@ public class BlogEntryRepository {
         "', BlogEntry.modified = CURRENT_TIMESTAMP, BlogEntryContent.content='" + data.getContent() +
         "' WHERE BlogEntry.id=" + data.getId());
   }
+
+  public void deleteBlogEntry(int id) {
+    jdbc.update("DELETE FROM BlogEntry WHERE BlogEntry.id=" + id);
+  }
 }

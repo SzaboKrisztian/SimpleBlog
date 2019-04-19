@@ -18,11 +18,11 @@
                         <div class="float-sm-right form-row">
                             <form action="/blog/edit" style="margin-right: 1rem;" method="post">
                                 <input type="hidden" th:value="${entry.getId()}" name="entryId">
-                                <button class="button btn btn-primary" action="submit">Edit</button>
+                                <button class="button btn btn-primary">Edit</button>
                             </form>
-                            <form method="post">
-                                <input type="hidden" th:value="${entry.getId()}">
-                                <button class="button btn btn-danger" action="submit">Delete</button>
+                            <form action="/blog/delete" method="post">
+                                <input type="hidden" th:value="${entry.getId()}" name="entryId">
+                                <button class="button btn btn-danger">Delete</button>
                             </form>
                         </div>
                         <div>
