@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
+    <title></title>
     <meta charset="UTF-8">
     <link th:fragment="bootstrap_head" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -19,7 +20,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/blog">Blog</a>
                 </li>
+                <li class="nav-item" sec:authorize="!authenticated">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="authenticated">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
             </ul>
+        </div>
+
+        <div class="float-right">
+            <div sec:authorize="authenticated">
+                <span sec:authentication="name"></span>
+            </div>
         </div>
     </nav>
 

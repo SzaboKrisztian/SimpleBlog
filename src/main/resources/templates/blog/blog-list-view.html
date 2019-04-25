@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Blog Index</title>
@@ -13,7 +13,11 @@
 
         <!-- TODO Pagination? -->
         <main class="flex-fill">
-            <a href="/blog/add" class="btn btn-primary float-right mx-3">Write new entry</a>
+            <div class="container" sec:authorize="authenticated">
+                <div class="jumbotron jumbotron-fluid rounded-lg text-dark bg-light mb-3 p-4 border border-dark">
+                    <a href="/blog/add" class="btn btn-primary">Write new entry</a>
+                </div>
+            </div>
             <div class="container" th:each="entry:${entries}">
                 <div class="jumbotron jumbotron-fluid rounded-lg text-dark bg-light mb-3 p-4 border border-dark">
                     <a class="text-dark" th:href="'/blog/entry/' + ${entry.getId()}">
