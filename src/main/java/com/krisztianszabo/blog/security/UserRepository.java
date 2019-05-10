@@ -15,7 +15,7 @@ public class UserRepository {
 
   public User findByUsername(String name) {
     User result = null;
-    String query = "SELECT * FROM users WHERE username = '" + name + "';";
+    String query = "SELECT * FROM Users WHERE username = '" + name + "';";
     SqlRowSet rs = jdbc.queryForRowSet(query);
 
     if(rs.first()) {
@@ -27,9 +27,9 @@ public class UserRepository {
       result.setEmail(rs.getString("emailAddress"));
 
       Set<Role> roles = new HashSet<>();
-      String roleQuery = "SELECT roles.id, roles.name FROM users INNER JOIN users_to_roles ON " +
-          "users_to_roles.user_id=users.id INNER JOIN roles ON roles.id=users_to_roles.role_id " +
-          "WHERE users.id=" + result.getId();
+      String roleQuery = "SELECT Roles.id, Roles.name FROM Users INNER JOIN users_to_roles ON " +
+          "users_to_roles.user_id=Users.id INNER JOIN Roles ON Roles.id=users_to_roles.role_id " +
+          "WHERE Users.id=" + result.getId();
       SqlRowSet role_rs = jdbc.queryForRowSet(roleQuery);
       while(role_rs.next()) {
         Role role = new Role();

@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="jumbotron jumbotron-fluid rounded-lg text-dark bg-light mb-3 p-4 border border-dark">
                     <div>
-                        <div class="float-sm-right form-row" sec:authorize="authenticated">
+                        <div class="float-sm-right form-row" sec:authorize="authenticated" th:if="${user.getId()} == ${entry.getAuthor().getId()}">
                             <form action="/blog/edit" style="margin-right: 1rem;" method="post">
                                 <input type="hidden" th:value="${entry.getId()}" name="entryId">
                                 <button class="button btn btn-primary">Edit</button>
@@ -27,7 +27,7 @@
                         </div>
                         <div>
                         <h3 class="card-title" th:text="${entry.getTitle()}"></h3>
-                        <h6 class="card-subtitle mb-4 text-muted" th:text="${entry.getFormattedCreated()} + ' by ' + ${entry.getAuthor()}" style="padding-left: .5rem; padding-right: .5rem;"></h6>
+                        <h6 class="card-subtitle mb-4 text-muted" th:text="${entry.getFormattedCreated()} + ' by ' + ${entry.getAuthor().getDisplayName()}" style="padding-left: .5rem; padding-right: .5rem;"></h6>
                         </div>
                         <div th:each="paragraph:${entry.getContentAsArray()}">
                             <p class="card-text text-justify" th:text="${paragraph}" style="margin-top: .5rem; margin-bottom: .5rem;"></p>

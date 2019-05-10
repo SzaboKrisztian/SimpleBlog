@@ -1,6 +1,8 @@
 package com.krisztianszabo.blog;
 
+import com.krisztianszabo.blog.security.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,12 @@ public class BlogController {
   @GetMapping("/blog/entry/{id}")
   public String detailView(@PathVariable("id")int id, Model model) {
     model.addAttribute("entry", blogEntryRepo.getBlogEntry(id));
+    User currentUser = blogEntryRepo.findUserByUsername((String) SecurityContextHolder
+        .getContext().getAuthentication().getPrincipal());
+    if(currentUser != null) {
+      currentUser.setPassword(null);
+    }
+    model.addAttribute("user", currentUser);
     return "blog/blog-entry-view";
   }
 

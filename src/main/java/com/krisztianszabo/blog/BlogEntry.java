@@ -1,11 +1,13 @@
 package com.krisztianszabo.blog;
 
+import com.krisztianszabo.blog.security.User;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class BlogEntry {
   private int id;
-  private String author;
+  private User author;
   private LocalDateTime created;
   private LocalDateTime modified;
   private String title;
@@ -20,11 +22,11 @@ public class BlogEntry {
     this.id = id;
   }
 
-  public String getAuthor() {
+  public User getAuthor() {
     return author;
   }
 
-  public void setAuthor(String author) {
+  public void setAuthor(User author) {
     this.author = author;
   }
 

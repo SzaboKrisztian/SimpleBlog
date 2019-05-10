@@ -1,0 +1,12 @@
+https://github.com/thymeleaf/thymeleaf-extras-springsecurity
+https://docs.spring.io/spring-security/site/docs/current/guides/html5//helloworld-javaconfig.html
+https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/
+https://www.baeldung.com/security-spring
+https://www.baeldung.com/spring-security-login
+https://www.baeldung.com/spring-security-authentication-provider
+https://www.dineshonjava.com/spring-security-tutorial-using-spring-boot/
+https://www.pureprogrammingtutorials.com/2018/05/settingup-spring-security.html
+https://medium.com/@gustavo.ponce.ch/spring-boot-spring-mvc-spring-security-mysql-a5d8545d837d
+https://www.thymeleaf.org/doc/articles/springsecurity.html
+https://www.mkyong.com/spring-boot/spring-boot-spring-security-thymeleaf-example/
+https://spring.io/guides/topicals/spring-security-architecture

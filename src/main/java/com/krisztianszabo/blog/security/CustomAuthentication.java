@@ -27,7 +27,7 @@ public class CustomAuthentication implements AuthenticationProvider {
     String password = auth.getCredentials().toString();
 
     User user = userRepo.findByUsername(username);
-    
+
     if(user==null){
       throw new BadCredentialsException("Username Not Found");
     }

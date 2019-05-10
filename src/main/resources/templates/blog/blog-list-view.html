@@ -23,7 +23,7 @@
                     <a class="text-dark" th:href="'/blog/entry/' + ${entry.getId()}">
                         <h3 class="card-title" th:text="${entry.getTitle()}"></h3>
                     </a>
-                    <h6 class="card-subtitle mb-4 text-muted" th:text="${entry.getFormattedCreated()} + ' by ' + ${entry.getAuthor()}" style="padding-left: .5rem; padding-right: .5rem;"></h6>
+                    <h6 class="card-subtitle mb-4 text-muted" th:text="${entry.getFormattedCreated()} + ' by ' + ${entry.getAuthor().getDisplayName()}" style="padding-left: .5rem; padding-right: .5rem;"></h6>
                     <div th:each="paragraph:${entry.getContentAsArray(500)}">
                         <p class="card-text text-justify" th:text="${paragraph}" style="margin-top: .5rem; margin-bottom: .5rem;"></p>
                     </div>
